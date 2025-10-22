@@ -97,27 +97,76 @@ int incluirpeso(void)
 
 int mostrarimc(void)
 {
-    FILE *fp;
-    FILE *fp2;
-    fp = fopen("Pessoa.csv", "r");
-    fp2 = fopen("Pessoa.csv", "r");
-    if (fp == NULL || fp2 == NULL)
+    int codigo_pessoa, pesopessoa;
+    float altura_pessoa, imc;
+    char linha[200];
+    Pessoa p;
+    Historico_Pesos p2;
+
+    printf("Digite o codigo da pessoa para o historico de IMC: ");
+    scanf("%d", &codigo_pessoa);
+
+    FILE *fp = fopen("Pessoa.csv", "r");
+
+    if (fp == NULL)
     {
         perror("Erro!!!");
         return EXIT_FAILURE;
     }
 
-    char IMC[200];
-    printf("\n--- IMC de Pessoas Cadastradas ---\n");
-    printf("Codigo | IMC\n");
-    printf("---------------------------\n");
-
-    while (fgets(IMC, 200, fp) != NULL)
+    while (fgets(linha, 200, fp) != NULL)
     {
-        printf("%s", IMC);
+        if (sscanf(linha, "%d | %19[^|] | %f | %f", &p.codigo, p.nome, &p.altura, &p.peso) == 4)
+        {
+            if (p.codigo == codigo_pessoa)
+            {
+                altura_pessoa = p.altura;
+                break;
+            }
+        }
     }
 
     fclose(fp);
+
+    if (altura_pessoa == 0.0)
+    {
+        printf("Codigo %d nao encontrado em Pessoa.csv ou dados invalidos.\n", codigo_pessoa);
+        return EXIT_SUCCESS;
+    }
+
+    FILE *fp2 = fopen("Pesos.csv", "r");
+
+    if (fp2 == NULL)
+    {
+        perror("Erro!!!");
+        return EXIT_FAILURE;
+    }
+
+    printf("\n--- Historico de IMC para Codigo %d (Altura: %.2f m) ---\n", codigo_pessoa, altura_pessoa);
+    printf("Data\t\tPeso (kg)\tIMC\n");
+    printf("----------------------------------------------------\n");
+
+    while (fgets(linha, 200, fp2) != NULL)
+    {
+        int dia, mes, ano;
+        if (sscanf(linha, "%d | %f | %d/%d/%d", &p2.codigo, &p2.quilos, &dia, &mes, &ano) == 5)
+        {
+            if (p2.codigo == codigo_pessoa)
+            {
+                imc = p2.quilos / (altura_pessoa * altura_pessoa);
+                printf("%02d/%02d/%d\t%.2f\t\t%.2f\n", dia, mes, ano, p2.quilos, imc);
+                pesopessoa = 1;
+            }
+        }
+    }
+
+    if (!pesopessoa)
+    {
+        printf("Nenhum historico de peso encontrado para o Codigo %d.\n", codigo_pessoa);
+    }
+
+    fclose(fp2);
+    printf("----------------------------------------------------\n");
     return EXIT_SUCCESS;
 }
 
@@ -131,7 +180,7 @@ int main(void)
         printf("1. Incluir Pessoa\n");
         printf("2. Mostrar Pessoas cadastradas\n");
         printf("3. Incluir Historico de pesos\n");
-        printf("4. Mostrar historico de IMCs (NAO IMPLEMENTADO)\n");
+        printf("4. Mostrar historico de IMCs\n");
         printf("0. Sair\n");
         printf("Escolha uma opcao: ");
 
@@ -140,8 +189,7 @@ int main(void)
             printf("Opcao invalida. Tente novamente.\n");
 
             int c;
-            while ((c = getchar()) != '\n' && c != EOF)
-                ;
+            while ((c = getchar()) != '\n' && c != EOF);
             selecao = -1;
             continue;
         }
@@ -160,7 +208,7 @@ int main(void)
             incluirpeso();
             break;
         case 4:
-            mostrarimc;
+            mostrarimc();
             break;
         case 0:
             printf("Saindo...");
