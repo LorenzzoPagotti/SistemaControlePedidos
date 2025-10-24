@@ -32,16 +32,4 @@ int valida_cpf(const char *cpf);
 // valida se CNPJ tem 14 dígitos e é numérico
 int valida_cnpj(const char *cnpj);
 
-// cadastra um cliente e grava no arquivo
-int cadastrar_cliente(void);
-
-// consulta cliente no arquivo
-int consultar_cliente(int id);
-
-// remove cliente (por id)
-int remover_cliente(int id);
-
-// lista todos os clientes
-int listar_clientes(void);
-
 #endif
