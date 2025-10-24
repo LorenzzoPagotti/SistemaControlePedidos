@@ -27,11 +27,11 @@ int analisa_cliente(void)
 {
 } // fazer
 
-int consultar_cliente(void)
+int consultar_cliente(int id)
 { // fazer
 }
 
-int remover_cliente(void)
+int remover_cliente(int id)
 { // fazer
 }
 
