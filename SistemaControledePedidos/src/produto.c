@@ -1,8 +1,7 @@
+#include "produto.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "E:\VISUAL\TP-TrabalhoFinal\SistemaControledePedidos\include\produto.h"
-
 
 int cadastrar_produto(void)
 {
