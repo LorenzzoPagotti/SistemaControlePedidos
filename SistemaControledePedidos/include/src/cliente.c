@@ -43,9 +43,9 @@ int cadastrar_cliente(void)
 {
     Cliente x;
 
-    FILE *fp;
-    fp = fopen("Clientes.csv", "a");
-    if (fp == NULL)
+    FILE *fp_cliente;
+    fp_cliente = fopen("Clientes.csv", "a");
+    if (fp_cliente == NULL)
     {
         perror("Erro na abertura de Clientes.csv");
         return EXIT_FAILURE;
@@ -72,8 +72,8 @@ int cadastrar_cliente(void)
     scanf("%s", x.nome_contato);
 
     // impressão dos dados coletados no arquivo CSV
-    fprintf(fp, "%d | %s | %s | %s\n", x.id, x.nome, x.endereco, x.telefone);
+    fprintf(fp_cliente, "%d | %s | %s | %s\n", x.id, x.nome, x.endereco, x.telefone);
 
-    fclose(fp); // fecha o arquivo
+    fclose(fp_cliente); // fecha o arquivo
     return EXIT_SUCCESS;
 }

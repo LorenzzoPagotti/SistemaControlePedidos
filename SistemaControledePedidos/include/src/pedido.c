@@ -1,69 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "E:\VISUAL\TP-TrabalhoFinal\SistemaControledePedidos\include\pedido.h"
 
-typedef struct
-{
-    int id;
-    double preco;
-    int estoque;
-    char descricao[100];
-
-} Produto;
-
-int cadastrarr_produto(void)
+int cadastrar_pedido(void)
 {
 }
 
-int analisa_produto(void)
+int analisa_pedido(void)
 {
 }
 
-int consultarr_produto(void)
+int cadastrar_item_pedido(int id)
 {
 }
 
-int remover_produto(void)
+int cadastrar_pedido(void)
 {
-}
+    Pedido x;
 
-int listar_produto(void)
-{
-}
-
-int listar_cliente(void)
-{
-}
-
-int main()
-{
-    Produto x;
-
-    FILE *fp_produto;
-    fp_produto = fopen("Produtos.csv", "a");
-    if (fp_produto == NULL)
+    FILE *fp_pedido;
+    fp_pedido = fopen("Pedidos.csv", "a");
+    if (fp_pedido == NULL)
     {
-        perror("Erro na abertura de Produtos.csv");
+        perror("Erro na abertura de Pedidos.csv");
         return EXIT_FAILURE;
     }
 
-    printf("Digite o codigo identificador do produto: ");
+    printf("Digite o codigo identificador do pedido: ");
     scanf("%d", &x.id);
 
     //==================================
-    // FUNÇÃO ANALISA PRODUTO RODA AQUI
+    // FUNÇÃO ANALISA PEDIDO RODA
     //==================================
 
-    printf("Informe a descrição: ");
-    scanf(" %[^\n]", x.descricao); // leitura do nome (inclui espaços até a quebra de linha)
-    printf("Informe o preço: ");
-    scanf("%lf", x.preco);
-    printf("Informe a quantidade em estoque: "); // coleta de informações
-    scanf("%d", x.estoque);
-
     // impressão dos dados coletados no arquivo CSV
-    fprintf(fp_produto, "%d | %s | %lf | %d\n", x.id, x.descricao, x.preco, x.estoque);
+    // fprintf(fp_pedido, "%d | %s | %s | %s\n", x.id, x.nome, x.endereco, x.telefone);
 
-    fclose(fp_produto); // fecha o arquivo
+    fclose(fp_pedido); // fecha o arquivo
     return EXIT_SUCCESS;
 }
