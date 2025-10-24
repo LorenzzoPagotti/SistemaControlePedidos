@@ -22,7 +22,7 @@ typedef struct
 // Funções
 // ====================
 
-// cadastra um cliente e grava no arquivo
+// cadastra um produto e grava no arquivo
 
 int cadastrar_produto(void)
 {
@@ -32,14 +32,17 @@ int analisa_produto(void)
 {
 }
 
+// consulta produto do arquivo
 int consultar_produto(int id)
 {
 }
 
+// remove produto do arquivo
 int remover_produto(int id)
 {
 }
 
+// lista prrodutos do arquivo
 int listar_produto(void)
 {
 }
