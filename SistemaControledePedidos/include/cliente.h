@@ -30,5 +30,8 @@ int valida_cpf(const char *cpf);
 int valida_cnpj(const char *cnpj);
 void cadastrar_cliente();
 void listar_clientes();
+Cliente* get_array_clientes();
+int* get_total_clientes();
+int get_max_clientes();
 
 #endif

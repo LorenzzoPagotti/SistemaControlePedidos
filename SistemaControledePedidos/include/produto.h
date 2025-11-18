@@ -21,8 +21,6 @@ typedef struct
 // Funções
 // ====================
 
-// cadastra um produto e grava no arquivo
-
 int cadastrar_produto();
 int listar_produto();
 int consultar_produto(int id);
