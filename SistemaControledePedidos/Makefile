@@ -1,78 +1,51 @@
 # ============================================================
 # Makefile — Sistema de Controle de Pedidos (SCP)
-# Compilação automática para Linux ou Windows (MinGW)
-# Linguagem: C
+# Projeto em C com múltiplos módulos e interface ncurses
 # ============================================================
-# Detecta o sistema operacional
-ifeq ($(OS),Windows_NT)
-PLATFORM = Windows
-EXT = .exe
-LIBS = -lpdcurses
-RM = del /Q
-MKDIR = if not exist "$(BUILD_DIR)" mkdir "$(BUILD_DIR)"
-SEP = \\
-else
-PLATFORM = Linux
-EXT =
-LIBS = -lncurses
-RM = rm -rf
-MKDIR = mkdir -p
-SEP = /
-endif
-# === Diretórios ===
-SRC_DIR = src
-INC_DIR = include
-BUILD_DIR = build
-# === Compilador e opções ===
-CC = gcc
-CFLAGS = -Wall -Wextra -I$(INC_DIR)
-# === Arquivos fonte e objeto ===
+# === CONFIGURAÇÕES GERAIS ===
+CC = gcc # Compilador C
+CFLAGS = -Wall -Wextra -Iinclude # Opções de compilação (-I indica
+onde estão os .h)
+LIBS = -lncurses # Biblioteca para interface de texto
+(Linux)
+BUILD_DIR = build # Diretório onde serão colocados os
+arquivos compilados
+SRC_DIR = src # Diretório dos arquivos .c
+
+INC_DIR = include # Diretório dos arquivos .h
+EXEC = $(BUILD_DIR)/scp # Nome do executável final
+# === LISTA DE ARQUIVOS ===
 SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $
 (SRC_FILES))
-EXEC = $(BUILD_DIR)$(SEP)scp$(EXT)
-
 # ============================================================
 # REGRAS PRINCIPAIS
 # ============================================================
-# Regra padrão — compila tudo
-all: info dirs $(EXEC)
-@echo "Compilação concluída com sucesso para $(PLATFORM)!"
-# Mostra informações iniciais
-info:
-@echo "=============================================="
-@echo "Compilando Sistema de Controle de Pedidos"
-@echo "Plataforma detectada: $(PLATFORM)"
-@echo "Compilador: $(CC)"
-@echo "=============================================="
-# Cria diretório de build se não existir
+# Regra padrão (executada quando rodamos apenas "make")
+all: dirs $(EXEC)
+@echo "Compilação concluída com sucesso!"
+# Cria diretório build se não existir
 dirs:
-@$(MKDIR)
-# Compila cada arquivo .c para .o
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-$(CC) $(CFLAGS) -c $< -o $@
-# Gera o executável final
+@mkdir -p $(BUILD_DIR)
+# Como gerar o executável a partir dos objetos
 $(EXEC): $(OBJ_FILES)
 $(CC) $(OBJ_FILES) -o $(EXEC) $(LIBS)
-# Remove arquivos compilados
+# Como gerar cada arquivo .o (objeto) a partir de um .c
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+$(CC) $(CFLAGS) -c $< -o $@
+# Limpa arquivos compilados
 clean:
-@$(RM) $(BUILD_DIR)
+rm -rf $(BUILD_DIR)
 @echo "Limpeza concluída."
-# Compila e executa o programa
+# Executa o programa (depois de compilar)
 run: all
 @echo "Executando o Sistema de Controle de Pedidos..."
-ifeq ($(PLATFORM),Windows)
 @$(EXEC)
-else
-@./$(EXEC)
-endif
 # Mostra ajuda
 help:
-@echo "=============================================="
 @echo "Comandos disponíveis:"
 @echo " make → compila o projeto"
 @echo " make run → compila e executa"
 @echo " make clean → remove arquivos compilados"
 @echo " make help → mostra esta ajuda"
-@echo "=============================================="
-.PHONY: all clean run help dirs info
+.PHONY: all clean run help dirs

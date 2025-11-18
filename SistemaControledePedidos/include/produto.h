@@ -9,13 +9,12 @@
 // Estrutura do Produto
 // ====================
 
-typedef struct
+typedef struct 
 {
     int id;
     double preco;
     int estoque;
     char descricao[100];
-
 } Produto;
 
 // ====================
@@ -24,27 +23,8 @@ typedef struct
 
 // cadastra um produto e grava no arquivo
 
-int cadastrar_produto(void)
-{
-}
-
-int analisa_produto(void)
-{
-}
-
-// consulta produto do arquivo
-int consultar_produto(int id)
-{
-}
-
-// remove produto do arquivo
-int remover_produto(int id)
-{
-}
-
-// lista prrodutos do arquivo
-int listar_produto(void)
-{
-}
+int cadastrar_produto();
+int listar_produto();
+int consultar_produto(int id);
 
 #endif
