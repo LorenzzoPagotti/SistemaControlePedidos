@@ -9,31 +9,27 @@
 // Estrutura do Pedido
 // ====================
 
-typedef struct
+typedef struct 
+{
+    int pedidoId;
+    int produtoId;
+    int quantidade;
+    float subtotal; // isso seria "quantidade X preco"
+} ItemPedido;
+
+typedef struct 
 {
     int id;
-    int clientId;
-    int dia, mes, ano;
+    int clienteId;
+    char data[11]; // dia/mes/ano (DD/MM/AAA), com 2 digitos no dia, 2 digitos no mes e 4 digitos para os anos
     double total;
-
 } Pedido;
 
 // ====================
 // Funções
 // ====================
 
-// cadastra um pedido e grava no arquivo
-
-int cadastrar_pedido(void)
-{
-}
-
-int analisa_pedido(void)
-{
-}
-
-int cadastrar_item_pedido(int id)
-{
-}
+int cadastrar_pedido();
+int listar_pedido();
 
 #endif
