@@ -12,11 +12,11 @@
 typedef struct
 {
     int id;
+    int tipo;
     char nome[100];
     char endereco[200];
     char telefone[20];
-    char CPF[12];  
-    char CNPJ[15];
+    char cpf_cnpj[20];
     char razao_social[100];
     char nome_contato[100];
     char email[100];
@@ -26,10 +26,9 @@ typedef struct
 // Funções
 // ====================
 
-// valida se CPF tem 11 dígitos e é numérico
 int valida_cpf(const char *cpf);
-
-// valida se CNPJ tem 14 dígitos e é numérico
 int valida_cnpj(const char *cnpj);
+void cadastrar_cliente();
+void listar_clientes();
 
 #endif
