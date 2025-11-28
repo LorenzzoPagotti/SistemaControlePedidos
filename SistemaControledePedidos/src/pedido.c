@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "E:\VISUAL\TP-TrabalhoFinal\SistemaControledePedidos\include\pedido.h"
+#include "../include/pedido.h"
 
 int cadastrar_pedido(void)
 {

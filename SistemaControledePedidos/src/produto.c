@@ -5,27 +5,7 @@
 
 int cadastrar_produto(void)
 {
-}
-
-int analisa_produto(void)
-{
-}
-
-int consultar_produto(int id)
-{
-}
-
-int remover_produto(int id)
-{
-}
-
-int listar_produto(void)
-{
-} // fazer
-
-int cadastrar_cliente(void)
-{
-    Produto x;
+        Produto x;
 
     FILE *fp_produto;
     fp_produto = fopen("Produtos.csv", "a");
@@ -55,3 +35,19 @@ int cadastrar_cliente(void)
     fclose(fp_produto); // fecha o arquivo
     return EXIT_SUCCESS;
 }
+
+int analisa_produto(void)
+{
+}
+
+int consultar_produto(int id)
+{
+}
+
+int remover_produto(int id)
+{
+}
+
+int listar_produto(void)
+{
+} // fazer

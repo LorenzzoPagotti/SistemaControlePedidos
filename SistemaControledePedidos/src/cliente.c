@@ -1,6 +1,6 @@
 
-#include "\SistemaControledePedidos\include\cliente.h"
-#include "\SistemaControledePedidos\include\interface.h"
+#include "../include/cliente.h"
+#include "../include/interface.h"
 #include <string.h>
 #include <ctype.h>
 
@@ -16,7 +16,7 @@ static int totalClientes = 0; // quantos clientes tem armazenados no programa
 // ====================
 
 void limpar_documento(const char* origem, char* destino) 
-{
+
     int j = 0;
     for (int i = 0; origem[i] != '\0'; i++) 
     {
