@@ -3,7 +3,7 @@
 
 #include <ncurses.h> // precisa disso daqui
 
-#include "cliente.h"
+#include "../include/cliente.h"
 #include "produto.h"
 #include "pedido.h"
 

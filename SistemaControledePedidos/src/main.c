@@ -1,190 +1,60 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include "../include/interface.h"
+#include "../include/persistencia.h"
+#include "../include/cliente.h"
+#include "../include/produto.h"
+#include "../include/pedido.h"
 
 int main(void)
 {
-    int selecao;
+    carregarClientesCSV(get_array_clientes(), get_total_clientes(), get_max_clientes());
+    carregarProdutosCSV(get_array_produtos(), get_total_produtos(), get_max_produtos());
+    
+    inicializarInterface();
 
-    do
+    int rodando = 1;
+    while (rodando)
     {
-        printf("\n--- MENU PRINCIPAL ---\n");
-        printf("1. Manter Produtos\n");
-        printf("2. Manter Clientes\n");
-        printf("3. Manter Pedidos\n");
-        printf("0. Sair\n");
-        printf("Escolha uma opcao: ");
+        int opcao = mostrarMenuPrincipal();
 
-        if (scanf("%d", &selecao) != 1)
+        switch (opcao)
         {
-            printf("Opcao invalida. Tente novamente.\n");
-
-            int c;
-            while ((c = getchar()) != '\n' && c != EOF)
-                ;
-            selecao = -1;
-            continue;
-        }
-
-        switch (selecao)
-        {
-        // =====================================================
-        case 1: // MANTER PRODUTOS
-        {
-            int opcao_produto;
-            do
+        case 1:
             {
-                printf("\n--- MANTER PRODUTOS ---\n");
-                printf("1. Cadastrar Novo Produto\n");
-                printf("2. Remover Produto Cadastrado\n");
-                printf("3. Consultar Produto Cadastrado\n");
-                printf("4. Listar Produtos Cadastrados\n");
-                printf("0. Voltar\n");
-                printf("Escolha uma opcao: ");
-
-                if (scanf("%d", &opcao_produto) != 1)
-                {
-                    printf("Opcao invalida. Tente novamente.\n");
-                    int c;
-                    while ((c = getchar()) != '\n' && c != EOF)
-                        ;
-                    opcao_produto = -1;
-                    continue;
-                }
-
-                switch (opcao_produto)
-                {
-                case 1:
-                    printf("-> Cadastrar novo produto (futura funcao)\n");
-                    break;
-                case 2:
-                    printf("-> Remover produto cadastrado (futura funcao)\n");
-                    break;
-                case 3:
-                    printf("-> Consultar produto cadastrado (futura funcao)\n");
-                    break;
-                case 4:
-                    printf("-> Listar produtos cadastrados (futura funcao)\n");
-                    break;
-                case 0:
-                    printf("Voltando ao menu principal...\n");
-                    break;
-                default:
-                    printf("Opcao invalida. Tente novamente.\n");
-                }
-
-            } while (opcao_produto != 0);
+                int opt = mostrarMenuClientes();
+                if (opt == 1) cadastrar_cliente();
+                if (opt == 2) listar_clientes();
+            }
             break;
-        }
 
-        // =====================================================
-        case 2: // MANTER CLIENTES
-        {
-            int opcao_cliente;
-            do
+        case 2:
             {
-                printf("\n--- MANTER CLIENTES ---\n");
-                printf("1. Cadastrar Novo Cliente\n");
-                printf("2. Remover Cliente Cadastrado\n");
-                printf("3. Consultar Cliente Cadastrado\n");
-                printf("4. Listar Clientes Cadastrados\n");
-                printf("0. Voltar\n");
-                printf("Escolha uma opcao: ");
-
-                if (scanf("%d", &opcao_cliente) != 1)
-                {
-                    printf("Opcao invalida. Tente novamente.\n");
-                    int c;
-                    while ((c = getchar()) != '\n' && c != EOF)
-                        ;
-                    opcao_cliente = -1;
-                    continue;
-                }
-
-                switch (opcao_cliente)
-                {
-                case 1:
-                    printf("-> Cadastrar novo cliente (futura funcao)\n");
-                    break;
-                case 2:
-                    printf("-> Remover cliente cadastrado (futura funcao)\n");
-                    break;
-                case 3:
-                    printf("-> Consultar cliente cadastrado (futura funcao)\n");
-                    break;
-                case 4:
-                    printf("-> Listar clientes cadastrados (futura funcao)\n");
-                    break;
-                case 0:
-                    printf("Voltando ao menu principal...\n");
-                    break;
-                default:
-                    printf("Opcao invalida. Tente novamente.\n");
-                }
-
-            } while (opcao_cliente != 0);
+                int opt = mostrarMenuProdutos();
+                if (opt == 1) cadastrar_produto();
+                if (opt == 2) listar_produto();
+            }
             break;
-        }
 
-        // =====================================================
-        case 3: // MANTER PEDIDOS
-        {
-            int opcao_pedido;
-            do
+        case 3:
             {
-                printf("\n--- MANTER PEDIDOS ---\n");
-                printf("1. Cadastrar Novo Pedido\n");
-                printf("2. Remover Pedido Cadastrado\n");
-                printf("3. Consultar Pedido Cadastrado\n");
-                printf("4. Listar Pedidos Cadastrados\n");
-                printf("0. Voltar\n");
-                printf("Escolha uma opcao: ");
-
-                if (scanf("%d", &opcao_pedido) != 1)
-                {
-                    printf("Opcao invalida. Tente novamente.\n");
-                    int c;
-                    while ((c = getchar()) != '\n' && c != EOF)
-                        ;
-                    opcao_pedido = -1;
-                    continue;
-                }
-
-                switch (opcao_pedido)
-                {
-                case 1:
-                    printf("-> Cadastrar novo pedido (futura funcao)\n");
-                    break;
-                case 2:
-                    printf("-> Remover pedido cadastrado (futura funcao)\n");
-                    break;
-                case 3:
-                    printf("-> Consultar pedido cadastrado (futura funcao)\n");
-                    break;
-                case 4:
-                    printf("-> Listar pedidos cadastrados (futura funcao)\n");
-                    break;
-                case 0:
-                    printf("Voltando ao menu principal...\n");
-                    break;
-                default:
-                    printf("Opcao invalida. Tente novamente.\n");
-                }
-
-            } while (opcao_pedido != 0);
-            break;
-        }
-
-        // =====================================================
-        case 0:
-            printf("Encerrando o programa...\n");
+                int opt = mostrarMenuPedidos();
+                if (opt == 1) cadastrar_pedido();
+                if (opt == 2) listar_pedido();
+            }
             break;
 
+        case 4:
+            rodando = 0;
+            break;
+            
         default:
-            printf("Opcao invalida. Tente novamente.\n");
+            break;
         }
+    }
 
-    } while (selecao != 0);
+    salvarClientesCSV(get_array_clientes(), *get_total_clientes());
+    salvarProdutosCSV(get_array_produtos(), *get_total_produtos());
 
+    finalizarInterface();
     return 0;
 }
