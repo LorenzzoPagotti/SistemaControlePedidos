@@ -16,8 +16,6 @@ int cadastrar_produto(void)
         return 0;
     }
 
-    // Pega dados da tela (precisa adicionar obterDadosNovoProduto no interface.c/.h)
-    // Vou deixar simplificado simulando que a função existe na interface
     Produto p = obterDadosNovoProduto(); 
 
     for(int i = 0; i < totalProdutos; i++)
@@ -52,9 +50,8 @@ int consultar_produto(int id)
     {
         if(listaProdutos[i].id == id) return i;
     }
-    return -1; 
+    return -1;
 }
-
 
 Produto* get_array_produtos() { return listaProdutos; }
 int* get_total_produtos() { return &totalProdutos; }
