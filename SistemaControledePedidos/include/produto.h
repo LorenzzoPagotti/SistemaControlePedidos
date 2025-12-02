@@ -17,12 +17,12 @@ typedef struct
     char descricao[100];
 } Produto;
 
-// ====================
-// Funções
-// ====================
-
-int cadastrar_produto();
-int listar_produto();
+int cadastrar_produto(void);
+int listar_produto(void);
 int consultar_produto(int id);
+
+Produto* get_array_produtos(void);
+int* get_total_produtos(void);
+int get_max_produtos(void);
 
 #endif

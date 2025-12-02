@@ -1,51 +1,72 @@
 # ============================================================
 # Makefile — Sistema de Controle de Pedidos (SCP)
-# Projeto em C com múltiplos módulos e interface ncurses
+# Versão Híbrida (Windows com MinGW / Linux)
 # ============================================================
-# === CONFIGURAÇÕES GERAIS ===
-CC = gcc # Compilador C
-CFLAGS = -Wall -Wextra -Iinclude # Opções de compilação (-I indica
-onde estão os .h)
-LIBS = -lncurses # Biblioteca para interface de texto
-(Linux)
-BUILD_DIR = build # Diretório onde serão colocados os
-arquivos compilados
-SRC_DIR = src # Diretório dos arquivos .c
 
-INC_DIR = include # Diretório dos arquivos .h
-EXEC = $(BUILD_DIR)/scp # Nome do executável final
-# === LISTA DE ARQUIVOS ===
+# === CONFIGURAÇÕES GERAIS ===
+CC = gcc
+# Inclui a pasta local 'include' onde está o curses.h
+CFLAGS = -Wall -Wextra -Iinclude 
+
+# Detecta Windows ou Linux automaticamente
+ifeq ($(OS),Windows_NT)
+    # --- CONFIGURAÇÃO WINDOWS ---
+    EXT = .exe
+    # Procura a biblioteca na pasta 'lib' e usa o pdcurses
+    LIBS = -Llib -lpdcurses 
+    RM = del /Q
+    fix_path = $(subst /,\,$1)
+    MKDIR = if not exist $(subst /,\,$(1)) mkdir $(subst /,\,$(1))
+else
+    # --- CONFIGURAÇÃO LINUX ---
+    EXT = 
+    LIBS = -lncurses
+    RM = rm -rf
+    fix_path = $1
+    MKDIR = mkdir -p $1
+endif
+
+# Diretórios
+BUILD_DIR = build
+SRC_DIR = src
+DATA_DIR = data
+
+# Nome do executável
+EXEC = $(BUILD_DIR)/scp$(EXT)
+
+# Lista de arquivos
 SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
-OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $
-(SRC_FILES))
+OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
+
 # ============================================================
 # REGRAS PRINCIPAIS
 # ============================================================
-# Regra padrão (executada quando rodamos apenas "make")
-all: dirs $(EXEC)
-@echo "Compilação concluída com sucesso!"
-# Cria diretório build se não existir
-dirs:
-@mkdir -p $(BUILD_DIR)
-# Como gerar o executável a partir dos objetos
+
+all: directories $(EXEC)
+	@echo "Compilacao concluida com sucesso!"
+
+# Cria as pastas necessárias (build e data)
+directories:
+	@$(call MKDIR,$(BUILD_DIR))
+	@$(call MKDIR,$(DATA_DIR))
+
+# Linkagem (Gera o executável final)
 $(EXEC): $(OBJ_FILES)
-$(CC) $(OBJ_FILES) -o $(EXEC) $(LIBS)
-# Como gerar cada arquivo .o (objeto) a partir de um .c
+	$(CC) $(OBJ_FILES) -o $(EXEC) $(LIBS)
+
+# Compilação (Gera os arquivos .o)
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-$(CC) $(CFLAGS) -c $< -o $@
-# Limpa arquivos compilados
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Limpeza
 clean:
-rm -rf $(BUILD_DIR)
-@echo "Limpeza concluída."
-# Executa o programa (depois de compilar)
+	@echo "Limpando arquivos..."
+	@$(RM) $(call fix_path,$(BUILD_DIR)/*)
+	@echo "Limpeza concluida."
+
+# Executar
 run: all
-@echo "Executando o Sistema de Controle de Pedidos..."
-@$(EXEC)
-# Mostra ajuda
-help:
-@echo "Comandos disponíveis:"
-@echo " make → compila o projeto"
-@echo " make run → compila e executa"
-@echo " make clean → remove arquivos compilados"
-@echo " make help → mostra esta ajuda"
-.PHONY: all clean run help dirs
+	@echo "Executando o Sistema..."
+	@$(call fix_path,$(EXEC))
+
+.PHONY: all clean run directories

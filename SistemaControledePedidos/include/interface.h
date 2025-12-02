@@ -1,8 +1,7 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
-#include <ncurses.h> // precisa disso daqui
-
+#include <curses.h> 
 #include "../include/cliente.h"
 #include "produto.h"
 #include "pedido.h"
@@ -45,5 +44,9 @@ void mostrarListaClientes(Cliente* arrayClientes, int totalClientes);
 // funcao de dados
 
 Cliente obterDadosNovoCliente(void);
+
+void mostrarListaProdutos(Produto* array, int qtd);
+
+Produto obterDadosNovoProduto(void);
 
 #endif
