@@ -1,35 +1,19 @@
 #ifndef PEDIDO_H
 #define PEDIDO_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-// ====================
-// Estrutura do Pedido
-// ====================
-
-typedef struct 
-{
-    int pedidoId;
-    int produtoId;
-    int quantidade;
-    float subtotal; // isso seria "quantidade X preco"
-} ItemPedido;
-
-typedef struct 
-{
+typedef struct {
     int id;
     int clienteId;
-    char data[11]; // dia/mes/ano (DD/MM/AAA), com 2 digitos no dia, 2 digitos no mes e 4 digitos para os anos
+    int produtoId; 
+    int quantidade;
     double total;
 } Pedido;
 
-// ====================
-// Funções
-// ====================
+int cadastrar_pedido(void);
+int listar_pedidos(void);
 
-int cadastrar_pedido();
-int listar_pedido();
+Pedido* get_array_pedidos(void);
+int* get_total_pedidos(void);
+int get_max_pedidos(void);
 
 #endif

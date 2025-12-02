@@ -5,10 +5,13 @@
 #include "../include/produto.h"
 #include "../include/pedido.h"
 
-void carregarClientesCSV(Cliente* arrayClientes, int* totalClientes, int maxClientes);
-void salvarClientesCSV(Cliente* arrayClientes, int totalClientes);
+void carregarClientesCSV(Cliente* array, int* total, int max);
+void salvarClientesCSV(Cliente* array, int total);
 
-void carregarProdutosCSV(Produto* arrayProdutos, int* totalProdutos, int maxProdutos);
-void salvarProdutosCSV(Produto* arrayProdutos, int totalProdutos);
+void carregarProdutosCSV(Produto* array, int* total, int max);
+void salvarProdutosCSV(Produto* array, int total);
+
+void carregarPedidosCSV(Pedido* array, int* total, int max);
+void salvarPedidosCSV(Pedido* array, int total);
 
 #endif

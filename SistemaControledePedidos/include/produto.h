@@ -1,16 +1,7 @@
 #ifndef PRODUTO_H
 #define PRODUTO_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-// ====================
-// Estrutura do Produto
-// ====================
-
-typedef struct 
-{
+typedef struct {
     int id;
     double preco;
     int estoque;
@@ -18,7 +9,8 @@ typedef struct
 } Produto;
 
 int cadastrar_produto(void);
-int listar_produto(void);
+int listar_produtos(void);
+void remover_produto(void);
 int consultar_produto(int id);
 
 Produto* get_array_produtos(void);
