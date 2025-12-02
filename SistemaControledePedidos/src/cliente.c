@@ -38,12 +38,14 @@ void cadastrar_cliente(void) {
     Cliente novo = obterDadosNovoCliente();
     
     int valido = (novo.tipo == 1) ? valida_cpf(novo.cpf_cnpj) : valida_cnpj(novo.cpf_cnpj);
-    if (!valido) {
+    if (!valido) 
+    {
         mostrarMensagem("Documento invalido!");
         return;
     }
 
-    for (int i = 0; i < totalClientes; i++) {
+    for (int i = 0; i < totalClientes; i++) 
+    {
         if (listaClientes[i].id == novo.id) {
             mostrarMensagem("Erro: ID ja existe!");
             return;

@@ -27,7 +27,7 @@ void mostrarMensagem(const char* mensagem) {
 
 int mostrarMenuPrincipal(void) {
     clear();
-    mvprintw(2, 10, "=== SISTEMA ===");
+    mvprintw(2, 10, "=== SISTEMA KAUA E LORENZZO ===");
     mvprintw(4, 10, "1. Clientes");
     mvprintw(5, 10, "2. Produtos");
     mvprintw(6, 10, "3. Pedidos");
