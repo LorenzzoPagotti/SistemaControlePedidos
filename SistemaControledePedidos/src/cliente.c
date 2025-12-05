@@ -38,14 +38,12 @@ void cadastrar_cliente(void) {
     Cliente novo = obterDadosNovoCliente();
     
     int valido = (novo.tipo == 1) ? valida_cpf(novo.cpf_cnpj) : valida_cnpj(novo.cpf_cnpj);
-    if (!valido) 
-    {
+    if (!valido) {
         mostrarMensagem("Documento invalido!");
         return;
     }
 
-    for (int i = 0; i < totalClientes; i++) 
-    {
+    for (int i = 0; i < totalClientes; i++) {
         if (listaClientes[i].id == novo.id) {
             mostrarMensagem("Erro: ID ja existe!");
             return;
@@ -90,6 +88,21 @@ void remover_cliente(void) {
     }
     totalClientes--;
     mostrarMensagem("Cliente removido com sucesso!");
+}
+
+void consultar_cliente(void) {
+    if (totalClientes == 0) {
+        mostrarMensagem("Nenhum cliente cadastrado.");
+        return;
+    }
+    int id = obterIdParaAcao("CONSULTAR CLIENTE");
+    for(int i=0; i<totalClientes; i++) {
+        if(listaClientes[i].id == id) {
+            mostrarDetalhesCliente(&listaClientes[i]);
+            return;
+        }
+    }
+    mostrarMensagem("Cliente nao encontrado.");
 }
 
 Cliente* get_array_clientes(void) { return listaClientes; }

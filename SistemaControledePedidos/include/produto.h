@@ -11,6 +11,7 @@ typedef struct {
 int cadastrar_produto(void);
 int listar_produtos(void);
 void remover_produto(void);
+void consultar_produto_visual(void);
 int consultar_produto(int id);
 
 Produto* get_array_produtos(void);

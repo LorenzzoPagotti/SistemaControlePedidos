@@ -69,6 +69,23 @@ int consultar_produto(int id) {
     return -1;
 }
 
+void consultar_produto_visual(void) {
+    if (totalProdutos == 0) 
+    {
+        mostrarMensagem("Nenhum produto cadastrado.");
+        return;
+    }
+    int id = obterIdParaAcao("CONSULTAR PRODUTO");
+    int index = consultar_produto(id);
+    
+    if(index != -1) 
+    {
+        mostrarDetalhesProduto(&listaProdutos[index]);
+    } else {
+        mostrarMensagem("Produto nao encontrado.");
+    }
+}
+
 Produto* get_array_produtos(void) { return listaProdutos; }
 int* get_total_produtos(void) { return &totalProdutos; }
 int get_max_produtos(void) { return MAX_PRODUTOS; }

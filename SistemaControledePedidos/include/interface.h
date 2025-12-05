@@ -2,7 +2,6 @@
 #define INTERFACE_H
 
 #include <curses.h>
-
 #include "../include/cliente.h"
 #include "../include/produto.h"
 #include "../include/pedido.h"
@@ -25,5 +24,9 @@ int obterIdParaAcao(const char* titulo);
 void mostrarListaClientes(Cliente* array, int total);
 void mostrarListaProdutos(Produto* array, int total);
 void mostrarListaPedidos(Pedido* array, int total);
+
+void mostrarDetalhesCliente(Cliente* c);
+void mostrarDetalhesProduto(Produto* p);
+void mostrarDetalhesPedido(Pedido* p);
 
 #endif

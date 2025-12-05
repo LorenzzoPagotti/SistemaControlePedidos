@@ -14,7 +14,8 @@ int valida_cpf(const char *cpf);
 int valida_cnpj(const char *cnpj);
 void cadastrar_cliente(void);
 void listar_clientes(void);
-void remover_cliente(void); 
+void remover_cliente(void);
+void consultar_cliente(void);
 
 Cliente* get_array_clientes(void);
 int* get_total_clientes(void);
